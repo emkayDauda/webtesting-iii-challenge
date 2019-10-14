@@ -57,4 +57,18 @@ describe("Display Component", () => {
 
         expect(wrapper.queryByText(/open/i)).toBeInTheDocument()
     })
+
+    it('uses the red-led class', () => {
+        const wrapper = rtl.render(<Display locked = {true}/>)
+        // wrapper.firstChild.debug()
+        // expect(wrapper.firstChild.classList.contains("red-led")).toBe(true)//.toHaveClass('red-led')
+
+        expect(wrapper.queryByText(/locked/i)).toHaveClass('red-led')
+    })
+
+    it('uses the green-led class', () => {
+        const wrapper = rtl.render(<Display locked = {true}/>)
+
+        expect(wrapper.queryByText(/unlocked|open/i)).toHaveClass('green-led')
+    })
 })
