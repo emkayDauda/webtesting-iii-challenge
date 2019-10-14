@@ -15,4 +15,21 @@ beforeEach(() => {
 
 describe("Controls Component", () => {
     it("Controls show", () => {})
+
+    it("Buttons present to manipulate gate", () => {
+      let gateLock = wrapper.getByTestId("locked");
+      let gateClose = wrapper.getByTestId("closed");
+      expect(gateLock).toBeInTheDocument();
+      expect(gateClose).toBeInTheDocument();
+    });
+    it("Close button is disabled while gate locked", () => {
+      rtl.cleanup();
+      wrapper = rtl.render(<Controls locked={true} closed={true} />);
+      let gateClose = wrapper.getByTestId("closed");
+      expect(gateClose).toBeDisabled();
+    });
+    it("Lock button is disabled while gate open", () => {
+      let gateLock = wrapper.getByTestId("locked");
+      expect(gateLock).toBeDisabled();
+  });
 })
