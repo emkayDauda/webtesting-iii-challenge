@@ -13,5 +13,10 @@ beforeEach(() => {
 });
 
 describe("Display Component", () => {
-    it("Display show", () => {})
+    it("Display shows", () => {})
+
+    it("Shows gate is open/closed and if it is locked/unlocked", () => {
+        expect(wrapper.queryByText(/open|closed/i) && wrapper.queryByText(/locked|unlocked/i)).toBeInTheDocument()
+        
+    })
 })
