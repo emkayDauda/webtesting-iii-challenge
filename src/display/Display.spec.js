@@ -9,13 +9,15 @@ afterEach(rtl.cleanup);
 let wrapper;
 
 beforeEach(() => {
-  wrapper = rtl.render(<Display />);
+//   wrapper = rtl.render(<Display />);
 });
 
 describe("Display Component", () => {
-    it("Display shows", () => {})
+
+    it("Display shows", () => { wrapper = rtl.render(<Display />);})
 
     it("Shows gate is open/closed and if it is locked/unlocked", () => {
+        wrapper = rtl.render(<Display />);
         expect(wrapper.queryByText(/open|closed/i) && wrapper.queryByText(/locked|unlocked/i)).toBeInTheDocument()
         
     })
@@ -36,5 +38,23 @@ describe("Display Component", () => {
         const wrapper = rtl.render(<Display />)
 
         expect(wrapper.queryByText(/Locked/)).not.toBeInTheDocument()
+    })
+
+    it("Displays closed when `closed` prop is true", () => {
+        const wrapper = rtl.render(<Display closed={true} />)
+
+        expect(wrapper.queryByText(/closed/i)).toBeInTheDocument()
+    })
+
+    it("Displays Open when `closed` prop is false", () => {
+        const wrapper = rtl.render(<Display closed={false} />)
+
+        expect(wrapper.queryByText(/Open/i)).toBeInTheDocument()
+    })
+
+    it("Displays Open when `closed` prop is not passed", () => {
+        const wrapper = rtl.render(<Display />)
+
+        expect(wrapper.queryByText(/open/i)).toBeInTheDocument()
     })
 })
