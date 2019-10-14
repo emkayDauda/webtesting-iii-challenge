@@ -19,4 +19,22 @@ describe("Display Component", () => {
         expect(wrapper.queryByText(/open|closed/i) && wrapper.queryByText(/locked|unlocked/i)).toBeInTheDocument()
         
     })
+
+    it("Displays locked when `locked` prop is true", () => {
+        const wrapper = rtl.render(<Display locked={true} />)
+
+        expect(wrapper.queryByText(/Locked/)).toBeInTheDocument()
+    })
+
+    it("Displays unlocked when `locked` prop is false", () => {
+        const wrapper = rtl.render(<Display locked={false} />)
+
+        expect(wrapper.queryByText(/Locked/)).not.toBeInTheDocument()
+    })
+
+    it("Displays unlocked when `locked` prop is not passed", () => {
+        const wrapper = rtl.render(<Display />)
+
+        expect(wrapper.queryByText(/Locked/)).not.toBeInTheDocument()
+    })
 })
